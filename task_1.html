@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        'use strict'
+        function reNum(num) {
+            if (Number.isInteger(num) && num <= 999 && num >= 0) {
+                let i = num.length - 1;
+                let obj = {
+                    units: '',
+                    tens: '',
+                    hundreds: ''
+                }
+                obj.units = num % 10;
+                obj.tens = Math.floor(num / 10) % 10;
+                obj.hundreds = Math.floor(num / 100);
+                return obj
+
+            } else {
+                console.log('Передавай на вход число в диапазоне [0, 999]');
+                return {}
+            }
+        }
+        // user code
+        console.log(reNum(999));
+        console.log(reNum(12));
+        console.log(reNum(1));
+        console.log(reNum(0));
+        console.log(reNum('qq'));
+        console.log(reNum(1000));
+        console.log(reNum(-10));
+    </script>
+</body>
+
+</html>

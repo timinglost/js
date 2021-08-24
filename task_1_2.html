@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        'use strict'
+        console.log('es5')
+        function PostEs5(author, text, date) {
+            this.author = author;
+            this.text = text;
+            this.date = date;
+        }
+        PostEs5.prototype.edit = function (new_text) {
+            this.text = new_text;
+        }
+
+        function AttachedPostEs5(author, text, date) {
+            PostEs5.call(this, author, text, date);
+            this.highlighted = false;
+        }
+        AttachedPostEs5.prototype = Object.create(PostEs5.prototype);
+        AttachedPostEs5.prototype.constructor = AttachedPostEs5;
+        AttachedPostEs5.prototype.makeTextHighlighted = function () {
+            this.highlighted = true;
+        }
+        // user code
+        let post1 = new PostEs5('I', 'original txt', '01.01.2021');
+        console.log(post1.text);
+        post1.edit('new txt');
+        console.log(post1.text);
+
+        let post2 = new AttachedPostEs5('Me', 'orig. txt', '01.01.2021');
+        console.log(post2.text);
+        console.log(post2.highlighted);
+        post2.edit('n. txt');
+        post2.makeTextHighlighted();
+        console.log(post2.text);
+        console.log(post2.highlighted);
+    </script>
+    <script>
+        'use strict'
+        console.log('es6')
+        class PostEs6 {
+            constructor(author, text, date) {
+                this.author = author;
+                this.text = text;
+                this.date = date;
+            }
+            edit(new_text) {
+                this.text = new_text;
+            }
+        }
+        class AttachedPostEs6 extends PostEs6 {
+            constructor(author, text, date) {
+                super(author, text, date);
+                this.highlighted = false;
+            }
+            makeTextHighlighted() {
+                this.highlighted = true;
+            }
+        }
+        // user code
+        let post3 = new PostEs6('I', 'original txt', '01.01.2021');
+        console.log(post3.text);
+        post3.edit('new txt');
+        console.log(post3.text);
+
+        let post4 = new AttachedPostEs6('Me', 'orig. txt', '01.01.2021');
+        console.log(post4.text);
+        console.log(post4.highlighted);
+        post4.edit('n. txt');
+        post4.makeTextHighlighted();
+        console.log(post4.text);
+        console.log(post4.highlighted);
+    </script>
+</body>
+
+</html>
