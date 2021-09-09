@@ -62,9 +62,9 @@ function addNewItem(id) {
     return `
     <div class="new_item">
         <div>${products[id].name}</div>
-        <div><span id="v_${id}">${basket_in[id]}</span></div>
-        <div>${products[id].price}</div>
-        <div><span id="p_${id}">${products[id].price}</span></div>
+        <div><span id="v_${id}">${basket_in[id]}</span> шт.</div>
+        <div>$${products[id].price}</div>
+        <div>$<span id="p_${id}">${products[id].price}</span></div>
     </div>
     <hr>`
 }
@@ -81,16 +81,14 @@ function clickPluse(event) {
         document.getElementById(`p_${target_id}`).innerText = priceAll + products[target_id].price;
         let priceAllMain = Number(document.getElementById(`main_pay`).innerText);
         document.getElementById('main_pay').innerText = priceAllMain + products[target_id].price;
-        let basketValues = Number(document.getElementById(`values_pay`).innerText);
-        document.getElementById('values_pay').innerText = basketValues + 1;
     } else {
         basket_in[target_id] = 1;
         addItem.insertAdjacentHTML('beforebegin', addNewItem(target_id));
         let priceAllMain = Number(document.getElementById(`main_pay`).innerText);
         document.getElementById('main_pay').innerText = priceAllMain + products[target_id].price;
-        let basketValues = Number(document.getElementById(`values_pay`).innerText);
-        document.getElementById('values_pay').innerText = basketValues + 1;
     }
+    let basketValues = Number(document.getElementById(`values_pay`).innerText);
+    document.getElementById('values_pay').innerText = basketValues + 1;
 }
 
 let buttonPlus = document.querySelectorAll('.btn');
